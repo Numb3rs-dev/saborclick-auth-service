@@ -1,0 +1,77 @@
+server:
+  port: 8080
+  timeout:
+    connect-ms: 10000
+    read-seconds: 10
+    write-seconds: 10
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/saborclick_auth_db
+    username: sabor_admin
+    password: supersecure
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: truemvn
+  application:
+    name: saborclick-auth
+  mail:
+    host: mail.privateemail.com
+    port: 587
+    username: notificaciones@saborclick.com
+    password: SaborNotificaciones123
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          debug: true
+  codec:
+    max-in-memory-size: 2MB
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+
+
+app:
+  bootstrap-superadmin:
+    enabled: true
+    username: admin
+    email: admin@saborclick.com
+    name: Super Admin
+    password: test123
+    tenant-name: TenantGlobal
+    tenant-id: tnt_global
+
+services:
+  auth:
+    url: http://localhost:8080 # o el dominio real del auth-service
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+jwt:
+  secret: Z0TGR47PlkDwYjTnLbe3uDPVMEoAa9lf+Xg+z3eqI2o=
+  expiration-ms: 3600000  # 1 hora (en milisegundos)
+
+security:
+  password-change-plan: SecretaYPoderosaClaveAPI123
+  secret-key: SecretaYPoderosaClaveAPI123
+
+saborclick:
+  jobs:
+    tokens:
+      cleanup-cron: "0 0 * * * *" # Cada hora
+
+
+
+
+
